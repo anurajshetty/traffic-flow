@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var pos_left=0;
+var car1=document.getElementById("car");
+var green,yellow,red;
+var run=10;
+var temp = 0;
+function greens()
+{
+document.getElementById("green").style.visibility="";
+document.getElementById("yellow").style.visibility="hidden";
+document.getElementById("red").style.visibility="hidden";
+t=Math.floor((Math.random()*10)+5);
+times=t*1000;
+green=1;
+yellow=0;
+red=0;
+if(temp ==0)
+{
+temp =1;
+positions();
+}
+setTimeout(function(){yellows(); },times);
+
+
+
+
+
+}
+function yellows()
+{
+t=Math.floor((Math.random()*8)+2);
+times=t*1000;
+document.getElementById("green").style.visibility="hidden";
+document.getElementById("yellow").style.visibility="";
+document.getElementById("red").style.visibility="hidden";
+green=0;
+yellow=1;
+red=0;
+setTimeout(function(){reds();},times);
+}
+function reds()
+{
+t=Math.floor((Math.random()*8)+2);
+times=t*1000;
+document.getElementById("green").style.visibility="hidden";
+document.getElementById("yellow").style.visibility="hidden";
+document.getElementById("red").style.visibility="";
+green=0;
+yellow=0;
+red=1;
+setTimeout(function(){greens();},times);
+}
+
+function positions()
+{
+if(green==1)
+{
+document.getElementById("stop").style.visibility="hidden";
+document.getElementById("go").style.visibility="";
+	run=10;
+	if(pos_left > 1200)
+	{
+		pos_left=0;
+	}
+
+setTimeout(function(){pos_left=pos_left+run;
+document.getElementById("car").style.left=pos_left+"px";
+positions();},80);
+
+}
+if(yellow==1)
+{
+document.getElementById("stop").style.visibility="hidden";
+document.getElementById("go").style.visibility="";
+run=10;
+if(pos_left > 1200)
+{
+pos_left=0;
+}
+if(pos_left > 300 && pos_left <670)
+{
+run=5;
+}
+
+setTimeout(function(){pos_left=pos_left+run;
+document.getElementById("car").style.left=pos_left+"px";
+positions();},80);
+
+}
+if(red==1)
+{
+document.getElementById("stop").style.visibility="hidden";
+document.getElementById("go").style.visibility="";
+run=10;
+if(pos_left > 1200)
+{
+pos_left=0;
+}
+
+if(pos_left > 300 && pos_left <670)
+{
+run=5;
+}
+
+if(pos_left > 630 && pos_left <670)
+{
+document.getElementById("stop").style.visibility="";
+document.getElementById("go").style.visibility="hidden";
+setTimeout(function(){positions();},1000);
+}
+else
+{
+	setTimeout(function(){pos_left=pos_left+run;
+	document.getElementById("car").style.left=pos_left+"px";
+	positions();},80);
+}
+}
+}
+
+
+
+
+
+
+
+</script>
+</head>
+<body style="background-color:black;" onload="greens()">
+<div id="red" style="position:absolute;top:10px;left:800px;height:110px;width:110px;background-image:url('red.jpg');background-size:contain;background-repeat:no-repeat;visibility:hidden;"></div>;
+<div id="yellow" style="position:absolute;top:10px;left:800px;height:108px;width:110px;background-image:url('yellow.jpg');background-size:contain;background-:no-repeat;visibility:hidden;"></div>;
+<div id="green" style="position:absolute;top:10px;left:800px;height:108px;width:110px;background-image:url('green.jpg');background-size:contain;background-:no-repeat;"></div>;
+<div style="border:3px solid grey;background-color:white;position:absolute;top:150px;left:0px;height:150px;width:100%;">
+<div style="text-align:right;position:absolute;left:740px;top:18px;background-image:url('road_stop.jpg');background-size:contain;background-repeat:no-repeat;width:60px;height:110px"></div>
+<div style="position:absolute;left:800px;bottom:0px;height:145px;border:3px solid grey;"></div>
+<div id="car"style="position:absolute;top:50px;left:0px;background-image:url('car.jpg');background-size:contain;background-repeat:no-repeat;width:150px;height:100px">
+</div>
+</div>
+<div id="go" style="text-align:right;position:absolute;background-image:url('go.jpg');background-size:contain;background-repeat:no-repeat;left:670px;top:310px;width:200px;height:200px"></div>
+<div id="stop" style="text-align:right;position:absolute;background-image:url('stop.jpg');background-size:contain;background-repeat:no-repeat;left:670px;top:310px;width:130px;height:130px"></div>
+
+</body>
+</html>
